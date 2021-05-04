@@ -64,15 +64,16 @@ app.get('/weather', (req,res) => {
     utils.geocode(req.query.addres, (error, {latitude, longitude, location} = {})=>{
         if (error) return res.send({error})
     
-        utils.weather(latitude, longitude, (error, {weather_descriptions, temperature, feelslike}={} )=>{
+        utils.weather(latitude, longitude, (error, {weather_descriptions, temperature, feelslike, humidity}={} )=>{
             if(error) return res.send({error})
 
             return res.send({
-                forecast    : location +' : '+ weather_descriptions + '. It is Currently '+ temperature + ' degress out. It feels like '+ feelslike+' degress out.',
+                forecast    : location +' : '+ weather_descriptions + '. It is Currently '+ temperature + ' degress out. It feels like '+ feelslike+' degress out. And humidity is ' + humidity + '%',
                 location    ,
                 addres      : req.query.addres,
                 temperature ,
-                feelslike
+                feelslike   ,
+                humidity
             })
         })  
     }) 
