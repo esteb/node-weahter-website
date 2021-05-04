@@ -14,6 +14,10 @@ console.log(path.join(__dirname, '../public'))
 
 const app = express()
 
+//crea una variable y la setea con el valor del puerto segun las variables de ambientes de heroku
+//y se agrega el operador o || para setear un valor por defecto si no existe el valor de ambiente, en este caso 3000
+const port = process.env.PORT || 3000
+
 //define pths for Express config
 const publicDirectoryPath   = path.join(__dirname, '../public')
 const viewsPath             = path.join(__dirname, '../templates/views')
@@ -144,6 +148,6 @@ app.get('/weather', (req, res) => {
 // app.com/help
 // app.com/about
 
-app.listen(3000, () => {
-    console.log('Server is up on port 3000')
+app.listen(port, () => {
+    console.log('Server is up on port',port)
 })
